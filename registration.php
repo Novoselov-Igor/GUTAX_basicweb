@@ -9,27 +9,35 @@
     <title>Регистрация</title>
 </head>
 <body class="d-flex h-100 align-items-center py-4 bg-light-subtle">
-<main class="col-lg-4 m-auto">
-    <form>
+<div class="col-lg-4 m-auto">
+    <form action="controller/registerUser.php" method="post">
         <h1 class="text-center h3 mb-3 fw-normal">Регистрация</h1>
 
-        <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Адрес эл.почты</label>
+        <div class="form-floating mb-1">
+            <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com"
+                   required>
+            <label for="floatingInput">e-mail</label>
         </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <div class="form-floating mb-1">
+            <input type="text" class="form-control" name="login" id="floatingInput" placeholder="login"
+                   required>
+            <label for="floatingInput">Логин</label>
+        </div>
+        <div class="form-floating mb-1">
+            <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password"
+                   required minlength="6">
             <label for="floatingPassword">Пароль</label>
         </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="passwordRepeat" id="floatingPassword"
+                   placeholder="Password repeat" required minlength="6">
             <label for="floatingPassword">Повторить пароль</label>
         </div>
 
-        <button class="w-100 btn btn-primary my-3 py-2" type="submit">Зарегистрироваться</button>
+        <button class="w-100 btn btn-primary py-2" type="submit">Зарегистрироваться</button>
 
-        <p class="mt-5 mb-3 text-body-secondary">Уже зарегистрированы? <a href="index.php">Войти.</a> </p>
+        <p class="mt-5 mb-3 text-body-secondary">Уже зарегистрированы? <a href="login.php">Войти.</a></p>
     </form>
-</main>
+</div>
 </body>
 </html>
