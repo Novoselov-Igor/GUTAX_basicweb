@@ -8,4 +8,31 @@ $checkboxes = $_POST['checkboxes'];
 $select = $_POST['select'];
 $comment = trim($_POST['comment']);
 
-print_r($_POST);
+$likeSiteDetailed = '';
+if ($checkboxes !== null) {
+    foreach ($checkboxes as $item) {
+        $likeSiteDetailed .= $item . ' ';
+    }
+} else {
+    $likeSiteDetailed = null;
+}
+
+$error = '';
+if ($name === null) {
+    $error = 'Введите имя';
+} elseif ($surname === null) {
+    $error = 'Введите фамилию';
+} elseif ($likeSite === null || $select === null) {
+    $error = 'Непредвиденная ошибка';
+}
+
+if ($error !== '') {
+    echo $error;
+    exit;
+}
+
+$sendFeedback = $pdo->prepare('INSERT INTO feedbacks (name, surname, likesSite, likesSiteDetailed, someData, comment) 
+VALUES (?,?,?,?,?,?)');
+$sendFeedback->execute([$name, $surname, $likeSite, trim($likeSiteDetailed), $select, $comment]);
+
+header('Location: /');

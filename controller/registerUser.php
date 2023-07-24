@@ -8,15 +8,15 @@ $passwordRepeat = trim($_POST['passwordRepeat']);
 
 $error = '';
 
-if ($email === '') {
+if ($email === null) {
     $error = 'Введите ваш email.';
-} elseif ($login === '') {
+} elseif ($login === null) {
     $error = 'Введите логин.';
-} elseif ($password === '') {
+} elseif ($password === null) {
     $error = 'Введите пароль.';
 } elseif (strlen($password) < 6) {
     $error = "Пароль слишком короткий.\nПароль должен содержать минимум 6 символов.";
-} elseif ($passwordRepeat === '' || $password !== $passwordRepeat) {
+} elseif ($passwordRepeat === null || $password !== $passwordRepeat) {
     $error = 'Пароли не совпадают.';
 }
 
@@ -36,7 +36,7 @@ if ($error !== '') {
     exit;
 }
 
-$insert = $pdo->prepare("insert into users (username, email, password, remember) values (?, ?, ?, 0)");
+$insert = $pdo->prepare("INSERT INTO users (username, email, password, remember) VALUES (?, ?, ?, 0)");
 $insert->execute([$login, $email, password_hash($password, PASSWORD_DEFAULT)]);
 
 header('Location: /login.php');
