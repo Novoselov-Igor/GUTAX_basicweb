@@ -29,10 +29,12 @@ if (!$userCheck->rowCount()) {
             $userCheck = $pdo->prepare('UPDATE users SET `password` = :password WHERE `email` = :email');
             $userCheck->execute(['email' => $email, 'password' => $newHash,]);
         }
+        $sendRememberMe = $pdo->prepare('UPDATE users SET `remember` = :remember WHERE `id` = :userid');
+        $sendRememberMe->execute(['remember' => $remember, 'userid' => $user['id']]);
         if ($user['remember']) {
-            setcookie('userId', $user['id'], time() + 36000, '/');
+            setcookie('userId', $user['id'], time() + 360000, '/');
         } else {
-            setcookie('userId', $user['id'], time() + 600, '/');
+            setcookie('userId', $user['id'], time() + 3600, '/');
         }
     }
 }
